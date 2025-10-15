@@ -21,7 +21,7 @@ use std::{
 };
 
 use ed25519_dalek::{VerifyingKey, pkcs8::DecodePublicKey};
-use iroh_base::{NodeAddr, NodeId, SecretKey};
+use iroh_base::{NodeAddr, NodeId, PublicKey, SecretKey};
 use iroh_relay::RelayMap;
 use n0_future::time::Duration;
 use n0_watcher::Watcher;
@@ -1025,6 +1025,11 @@ impl Endpoint {
     // # Methods for less common getters.
     //
     // Partially they return things passed into the builder.
+
+    /// Returns a Vec of NodeIds that we might have connections to.
+    pub fn connections(&self) -> Vec<PublicKey> {
+        self.msock.node_ids()
+    }
 
     /// Returns a [`Watcher`] that reports the current connection type and any changes for
     /// given remote node.

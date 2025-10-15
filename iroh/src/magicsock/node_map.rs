@@ -339,6 +339,16 @@ impl NodeMap {
             .expect("poisoned")
             .on_direct_addr_discovered(discovered, Instant::now());
     }
+
+    pub(crate) fn node_ids(&self) -> Vec<PublicKey> {
+        self.inner
+            .lock()
+            .expect("poisoned")
+            .by_node_key
+            .keys()
+            .cloned()
+            .collect()
+    }
 }
 
 impl NodeMapInner {

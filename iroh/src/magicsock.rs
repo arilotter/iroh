@@ -286,7 +286,12 @@ impl MagicSock {
             .unwrap_or(false)
     }
 
-    /// Return the [`RemoteInfo`]s of all nodes in the node map.
+    /// Return the [`PublicKey`]s of all nodes in the node map.
+    pub(crate) fn node_ids(&self) -> Vec<PublicKey> {
+        self.node_map.node_ids()
+    }
+
+    /// Return the [`RemoteInfo`]s of all endpoints in the endpoint map.
     #[cfg(test)]
     pub(crate) fn list_remote_infos(&self) -> Vec<RemoteInfo> {
         self.node_map.list_remote_infos(Instant::now())
