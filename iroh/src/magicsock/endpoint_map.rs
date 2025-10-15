@@ -345,6 +345,16 @@ impl EndpointMap {
             .expect("poisoned")
             .on_direct_addr_discovered(discovered, Instant::now());
     }
+
+    pub(crate) fn endpoint_ids(&self) -> Vec<PublicKey> {
+        self.inner
+            .lock()
+            .expect("poisoned")
+            .by_endpoint_key
+            .keys()
+            .cloned()
+            .collect()
+    }
 }
 
 impl EndpointMapInner {

@@ -952,6 +952,11 @@ impl Endpoint {
     //
     // Partially they return things passed into the builder.
 
+    /// Returns a Vec of EndpointIds that we might have connections to.
+    pub fn connections(&self) -> Vec<EndpointId> {
+        self.msock.endpoint_ids()
+    }
+
     /// Returns a [`Watcher`] that reports the current connection type and any changes for
     /// given remote endpoint.
     ///
